@@ -1,0 +1,76 @@
+// Exercício 1 - Magic 8 Ball
+const readline = require('readline'); // Este código carrega o módulo readline do Node.js, que você precisa para criar uma interface de leitura. Ele é essencial para a conexão entre o node.
+
+// Interface para ler a entrada do usuário
+const rl = readline.createInterface({ // Cria uma interface que permite ao seu programa ler o que o usuário digita e mostrar mensagens no terminal. Sem essa interface, o programa não conseguiria interagir com o usuário. 
+    input: process.stdin, // A entrada é o teclado (o que o usuário digita)
+    output: process.stdout // A saída é o console (onde você mostra as mensagens)
+});
+
+// Array com as respostas possíveis
+const respostas = [ //Cria uma lista de respostas que a Magic 8 Ball pode dar.
+    "Sim",
+    "Não sei, só sei que foi assim",
+    "Não conte com isso",
+    "Minhas fontes dizem que não",
+    "Perspectiva não tão boa",
+    "Sinais apontam para que sim",
+    "Definitivamente não",
+    "Difícil prever, tente novamente"
+];
+
+// Função para gerar uma resposta aleatória
+function getMagic8BallResposta() { // A função escolhe uma resposta aleatória da lista cada vez que é chamada, e ela faz isso para cada pergunta que o usuário faz.
+    const numeroAleatorio = Math.floor(Math.random() * respostas.length);
+    return respostas[numeroAleatorio];
+} //  Primeiro, o código gera um número aleatório entre 0 e o número total de respostas (respostas.length). Depois, esse número aleatório (numeroAleatorio) é usado para pegar uma resposta específica da lista e retorná-la.
+
+// Solicita uma pergunta ao usuário e fornece uma resposta
+rl.question('Faça sua pergunta: ', (question) => { 
+    console.log(getMagic8BallResposta());
+    rl.close();
+});
+ // Por fim faço um pergunta ao usuario e uso a função 'getMagic8BallResposta' para obter uma resposta aleatória.
+
+
+// Exercício 2 - Dia de corrida
+const readline = require('readline'); 
+
+// Cria uma interface para entrada e saída
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// Solicita a idade do corredor
+rl.question("Digite sua idade: ", (entradaIdade) => {
+  let idade = Number(entradaIdade); // Number(ageInput): Converte a resposta do usuário (que é uma string) para um número. Agora, idade é um número.
+
+  // Solicita se o corredor se registrou cedo
+  rl.question("Você se registrou cedo? (Digite 'sim' ou 'não'): ", (entradaRegistro) => {
+    let registradoCedo = entradaRegistro.toLowerCase() === 'sim'; // .toLowerCase(): Converte a resposta do usuário para letras minúsculas, garantindo consistência na comparação.
+
+    // Cria uma variável para armazenar o número de corrida
+    let raceNumber = Math.floor(Math.random() * 1000);
+/*Math.random(): Gera um número decimal aleatório entre 0 e 1.
+Math.random() * 1000: Multiplica o número aleatório por 1000, criando um número decimal entre 0 e 999.999.
+Math.floor(): Arredonda esse número para baixo, transformando-o em um número inteiro entre 0 e 999.*/
+
+// Atribuição do número de corrida para corredores adultos que se registraram cedo
+  if (idade > 18 && registradoCedo) { // if (age > 18 && registeredEarly): Verifica duas coisas: Se o usuário tem mais de 18 anos (age > 18).
+    raceNumber += 1000;               // Se ele se registrou cedo (registradoCedo for verdadeiro).
+} //raceNumber += 1000;: Se as duas condições acima forem verdadeiras, 1000 é adicionado ao número de corrida, garantindo que adultos que se registraram cedo tenham um número a partir de 1000. 
+
+// Exibe a mensagem com o número de corrida e o horário de início no console.
+  if (idade > 18 && registradoCedo) { // Se o corredor é adulto e se registrou cedo, exibe a mensagem com o horário de 9h30.
+    console.log(`Corredor ${raceNumber}: Você correrá às 9h30.`);
+  } else if (idade > 18 && !registradoCedo) { // Se o corredor é adulto e não se registrou cedo, exibe a mensagem com o horário de 11h00.
+    console.log(`Corredor ${raceNumber}: Você correrá às 11h00.`);
+  } else if (idade < 18) { // Se o corredor é jovem (menos de 18 anos), exibe a mensagem com o horário de 12h30.
+    console.log(`Corredor ${raceNumber}: Você correrá às 12h30.`);
+  }
+
+// Fecha a interface readline
+  rl.close();
+  });
+});
