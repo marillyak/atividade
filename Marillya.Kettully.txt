@@ -1,0 +1,91 @@
+// Exercício 1 - Gerar Array de Números Aleatórios
+// Função para gerar array de números aleatórios
+function gerarArrayNumerosAleatorios(tamanho, valorMinimo, valorMaximo) {
+    // Inicializa o array vazio
+    let array = [];
+    // Laço para preencher o array com números aleatórios
+    for (let i = 0; i < tamanho; i++) {
+        // Gera um número aleatório entre o valorMinimo e o valorMaximo
+        let numeroAleatorio = Math.floor(Math.random() * (valorMaximo - valorMinimo + 1)) + valorMinimo;
+        array.push(numeroAleatorio); // Adiciona o número ao array
+    }
+    return array; // Retorna o array gerado
+}
+
+// Exemplo de uso
+console.log(gerarArrayNumerosAleatorios(5, 1, 100)); // Gera um array de 5 números entre 1 e 100
+
+//Exercício 2 - Encontrar o Elemento Mais Frequente
+
+// Função para encontrar o elemento mais frequente em um array
+function elementoMaisFrequente(array) {
+    // Objeto para armazenar a frequência de cada elemento
+    let frequencia = {};
+    let maxFreq = 0;
+    let elementoFrequente = null;
+
+    // Laço para calcular a frequência de cada elemento
+    for (let num of array) {
+        frequencia[num] = (frequencia[num] || 0) + 1; // Incrementa a contagem
+        // Atualiza o mais frequente se a contagem atual for maior
+        if (frequencia[num] > maxFreq) {
+            maxFreq = frequencia[num];
+            elementoFrequente = num;
+        }
+    }
+
+    // Verifica se há um elemento mais frequente ou não
+    return maxFreq > 1 ? elementoFrequente : "Não há elemento mais frequente";
+}
+
+// Exemplo de uso
+console.log(elementoMaisFrequente([1, 3, 2, 1, 2, 2, 4])); // Retorna 2
+
+//Exercício 3 - Remover Elementos Repetidos
+
+// Função para remover elementos repetidos de um array
+function removerElementosRepetidos(array) {
+    // Converte o array em um conjunto (Set), que só mantém valores únicos
+    let arrayUnico = [...new Set(array)];
+
+    // Verifica se o array tinha elementos repetidos
+    return arrayUnico.length < array.length ? arrayUnico : "Não há elementos repetidos";
+}
+
+// Exemplo de uso
+console.log(removerElementosRepetidos([1, 2, 2, 3, 4, 4, 5])); // Retorna [1, 2, 3, 4, 5]
+
+//Exercício 4 - Concatenar Arrays
+
+// Função para concatenar dois arrays
+function concatenarArrays(array1, array2) {
+    // Usa o método concat para unir os dois arrays
+    return array1.concat(array2);
+}
+
+// Exemplo de uso
+console.log(concatenarArrays([1, 2, 3], [4, 5, 6])); // Retorna [1, 2, 3, 4, 5, 6]
+
+//Exercício 5 - Juntar as Funções
+
+// Função principal que chama todas as outras funções
+function main() {
+    console.log("Passando pela função do Exercício 1");
+    let arrayAleatorio = gerarArrayNumerosAleatorios(5, 1, 100);
+    console.log("Array gerado:", arrayAleatorio);
+
+    console.log("Passando pela função do Exercício 2");
+    let frequente = elementoMaisFrequente(arrayAleatorio);
+    console.log("Elemento mais frequente:", frequente);
+
+    console.log("Passando pela função do Exercício 3");
+    let arraySemRepeticoes = removerElementosRepetidos(arrayAleatorio);
+    console.log("Array sem repetições:", arraySemRepeticoes);
+
+    console.log("Passando pela função do Exercício 4");
+    let arrayConcatenado = concatenarArrays(arrayAleatorio, [1, 2, 3]);
+    console.log("Arrays concatenados:", arrayConcatenado);
+}
+
+// Chama a função main
+main();
